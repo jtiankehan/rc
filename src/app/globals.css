@@ -1,0 +1,445 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+@import "tailwindcss";
+
+/* =============================================
+   设计系统 Token — 瑞承文化
+   ============================================= */
+:root {
+  /* 背景层 */
+  --bg-base:    #0A0D10;
+  --bg-deep:    #060809;
+  --bg-card:    rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.06);
+
+  /* 文字层 */
+  --text-primary:   #F2F2F2;
+  --text-secondary: #A0A0A0;
+  --text-muted:     #5a5a5a;
+
+  /* 点缀色 — 琥珀金 */
+  --gold:       #C9943A;
+  --gold-light: #E8B85A;
+  --gold-dark:  #8B6420;
+
+  /* 朱砂红 */
+  --vermilion:  #C0392B;
+  --vermilion-light: #E74C3C;
+
+  /* 渐变 */
+  --grad-gold:    linear-gradient(135deg, #C9943A, #E8B85A, #C9943A);
+  --grad-gold-alt: linear-gradient(135deg, #8B6420, #C9943A 50%, #E8B85A);
+  --grad-dark:    linear-gradient(180deg, #0A0D10 0%, #060809 100%);
+
+  /* 边框 */
+  --border-dim:    rgba(255,255,255,0.06);
+  --border-gold:   rgba(201,148,58,0.3);
+  --border-glow:   rgba(201,148,58,0.5);
+
+  /* 阴影 */
+  --shadow-card: 0 4px 32px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.04) inset;
+  --shadow-gold: 0 0 40px rgba(201,148,58,0.2);
+}
+
+/* =============================================
+   基础重置
+   ============================================= */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #f5f8f6;
+  color: #111;
+  font-family: 'Inter', 'Noto Sans SC', 'PingFang SC', system-ui, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: rgba(201,148,58,0.4); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(201,148,58,0.7); }
+
+/* =============================================
+   Liquid Glass 组件
+   ============================================= */
+@layer components {
+  .liquid-glass {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.08), 0 8px 32px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+}
+
+/* =============================================
+   通用工具类
+   ============================================= */
+
+/* 金色渐变文字 */
+.grad-gold {
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 玻璃卡片 */
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  transition: background 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.glass-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-gold);
+  box-shadow: var(--shadow-card), var(--shadow-gold);
+  transform: translateY(-4px);
+}
+
+/* CTA 主按钮 — 琥珀金 */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 36px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #0A0D10;
+  background: var(--grad-gold);
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s;
+  box-shadow: 0 4px 24px rgba(201,148,58,0.35);
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.25), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.btn-primary:hover::after { opacity: 1; }
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 40px rgba(201,148,58,0.5);
+}
+
+/* 轮廓按钮 */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold-light);
+  background: rgba(201,148,58,0.06);
+}
+
+/* Section 通用 */
+.section {
+  padding: 130px 24px;
+  position: relative;
+}
+@media (max-width: 768px) {
+  .section { padding: 90px 20px; }
+}
+
+/* 金色分隔线 */
+.divider-gold {
+  width: 40px;
+  height: 2px;
+  background: var(--grad-gold);
+  border-radius: 1px;
+}
+
+/* 标签/Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 1px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(201,148,58,0.08);
+  border: 1px solid rgba(201,148,58,0.25);
+  color: var(--gold-light);
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+/* 能力药丸标签 */
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  background: rgba(201,148,58,0.07);
+  border: 1px solid rgba(201,148,58,0.2);
+  color: var(--gold-light);
+  font-family: 'Noto Sans SC', sans-serif;
+  transition: all 0.3s;
+}
+.tag-pill:hover {
+  background: rgba(201,148,58,0.15);
+  border-color: rgba(201,148,58,0.4);
+}
+.tag-pill::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* 项目卡片 */
+.proj-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.proj-card .proj-img {
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.proj-card:hover .proj-img {
+  transform: scale(1.05);
+}
+.proj-card .proj-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(6,8,9,0.95) 0%, rgba(6,8,9,0.5) 40%, transparent 100%);
+  transition: opacity 0.4s;
+}
+/* 光泽扫光效果 */
+.proj-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255,255,255,0.04) 50%,
+    rgba(255,255,255,0.06) 52%,
+    rgba(255,255,255,0.04) 54%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s, transform 0.6s;
+  transform: translateX(-100%);
+  pointer-events: none;
+  z-index: 10;
+}
+.proj-card:hover::after {
+  opacity: 1;
+  transform: translateX(100%);
+}
+
+/* 毛玻璃卡片 */
+.glass-frost {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+/* 导航滚动状态 */
+.nav-scrolled {
+  background: rgba(10,13,16,0.92) !important;
+  backdrop-filter: blur(24px) !important;
+  border-bottom: 1px solid var(--border-dim) !important;
+}
+
+/* =============================================
+   Ken Burns 动画
+   ============================================= */
+@keyframes kenBurns {
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.12); }
+}
+.anim-ken-burns {
+  animation: kenBurns 20s ease-in-out infinite alternate;
+}
+
+/* =============================================
+   浮动动画
+   ============================================= */
+@keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+.anim-float { animation: float 6s ease-in-out infinite; }
+
+/* 脉冲 */
+@keyframes pulse-dot { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(1.6); } }
+.pulse-dot { animation: pulse-dot 2.5s ease-in-out infinite; }
+
+/* 光晕流动 */
+@keyframes glow-drift {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.15; }
+  33%  { transform: translate(40px, -30px) scale(1.1); opacity: 0.2; }
+  66%  { transform: translate(-20px, 20px) scale(0.95); opacity: 0.12; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+}
+.anim-glow { animation: glow-drift 12s ease-in-out infinite; }
+.anim-glow-delay { animation: glow-drift 16s ease-in-out infinite 3s; }
+
+/* Marquee */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-inner { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+.marquee-inner:hover { animation-play-state: paused; }
+
+/* =============================================
+   3D 场景覆盖层（保留兼容）
+   ============================================= */
+.content-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(10, 13, 16, 0.88);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.overlay-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 68px;
+  scroll-behavior: smooth;
+}
+.overlay-back-btn {
+  position: fixed;
+  top: 80px;
+  left: 24px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-dim);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.overlay-back-btn:hover {
+  color: var(--gold-light);
+  background: rgba(201,148,58,0.08);
+  border-color: var(--border-gold);
+}
+.overlay-room-badge {
+  position: fixed;
+  top: 80px;
+  right: 24px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid;
+  backdrop-filter: blur(12px);
+  letter-spacing: 0.04em;
+}
+.overlay-hero-content {
+  min-height: calc(100vh - 68px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; pointer-events: none; }
+}
+
+/* 数字统计 */
+.stat-number {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1;
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 项目筛选标签 */
+.filter-pill {
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--border-dim);
+  color: var(--text-secondary);
+  background: transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.filter-pill:hover {
+  border-color: rgba(201,148,58,0.4);
+  color: var(--text-primary);
+}
+.filter-pill.active {
+  background: rgba(201,148,58,0.1);
+  border-color: rgba(201,148,58,0.5);
+  color: var(--gold-light);
+}
+
+/* grad-text 兼容旧组件 */
+.grad-text {
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Marquee-rev 兼容 */
+@keyframes marquee-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.marquee-inner-rev { display: flex; width: max-content; animation: marquee-rev 32s linear infinite; }
