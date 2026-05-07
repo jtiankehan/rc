@@ -27,7 +27,7 @@ export default function CinematicHero() {
     >
 
       {/* ── 居中内容容器 ── */}
-      <div style={{
+      <div id="hero-grid" style={{
         maxWidth: 1200, width: '100%',
         padding: '0 48px',
         display: 'grid',
@@ -78,6 +78,7 @@ export default function CinematicHero() {
 
         {/* 右：Canvas 动态交互 */}
         <motion.div
+          id="hero-canvas-wrap"
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -111,6 +112,14 @@ export default function CinematicHero() {
 
       <style>{`
         @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+        @media (max-width: 768px) {
+          #hero-grid {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+            padding: 0 20px !important;
+          }
+          #hero-canvas-wrap { display: none !important; }
+        }
       `}</style>
     </section>
   );
