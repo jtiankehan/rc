@@ -1,6 +1,5 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import CinematicHero from '@/components/CinematicHero';
 import AboutSection from '@/components/AboutSection';
 import ProjectsSection from '@/components/ProjectsSection';
