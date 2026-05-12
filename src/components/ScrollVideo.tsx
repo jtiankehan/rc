@@ -8,10 +8,13 @@ interface ScrollVideoProps {
 
 export default function ScrollVideo({ src = '/hero-video.mp4' }: ScrollVideoProps) {
   const videoRef    = useRef<HTMLVideoElement>(null);
-  const lastScrollY = useRef(typeof window !== 'undefined' ? window.scrollY : 0);
+  const lastScrollY = useRef(0);
   const rafRef      = useRef<number>(0);
 
   useEffect(() => {
+    // 在客户端 effect 内同步真实滚动位置，避免 hydration 不匹配
+    lastScrollY.current = window.scrollY;
+
     const video = videoRef.current;
     if (!video) return;
 
