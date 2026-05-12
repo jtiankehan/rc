@@ -140,7 +140,10 @@ export default function Footer() {
           initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true, margin:'-80px' }}
           transition={{ delay:0.5, duration:0.5 }}
           style={{ marginTop:40, paddingTop:20, borderTop:'1px solid rgba(0,0,0,0.06)', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:8 }}>
-          <p style={{ fontFamily:"'Inter',sans-serif", fontSize:12, color:'#ccc', margin:0 }}>© 2026 瑞承文化 (Ruicheng Culture). All rights reserved.</p>
+          <div style={{ display:'flex', alignItems:'center', gap:16, flexWrap:'wrap' }}>
+            <p style={{ fontFamily:"'Inter',sans-serif", fontSize:12, color:'#ccc', margin:0 }}>© 2026 瑞承文化 (Ruicheng Culture). All rights reserved.</p>
+            <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer" style={{ fontFamily:"'Inter',sans-serif", fontSize:12, color:'#ccc', textDecoration:'none', transition:'color 0.2s' }} onMouseEnter={e=>(e.currentTarget.style.color='#3a6650')} onMouseLeave={e=>(e.currentTarget.style.color='#ccc')}>蜀ICP备2024098185号</a>
+          </div>
           <p style={{ fontFamily:"'Inter',sans-serif", fontSize:12, color:'rgba(58,102,80,0.5)', margin:0 }}>立足四川，服务全国。</p>
         </motion.div>
       </div>
